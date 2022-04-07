@@ -1,0 +1,24 @@
+# For more information on how to configure this file, please see:
+# https://docs.getdbt.com/docs/profile
+
+cloud_cost_monitoring:
+  target: "{{ env_var('DBT_PROFILE_TARGET') }}"
+
+  outputs: # test and prod are identical, but their target names has significance in different build stages
+    test:
+      type: mysql
+      server: localhost
+      port: 3306
+      schema: "{{ env_var('DBT_PROFILE_DB') }}"
+      username: "{{ env_var('DBT_PROFILE_USER') }}"
+      password: "{{ env_var('DBT_PROFILE_PASSWORD') }}"
+      ssl_disabled: True
+
+    prod:
+      type: mysql
+      server: localhost
+      port: 3306
+      schema: "{{ env_var('DBT_PROFILE_DB') }}"
+      username: "{{ env_var('DBT_PROFILE_USER') }}"
+      password: "{{ env_var('DBT_PROFILE_PASSWORD') }}"
+      ssl_disabled: True
